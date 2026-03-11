@@ -18,6 +18,12 @@ npm run dev
 
 Open `http://localhost:3000`.
 
+### Google Analytics (GA4)
+
+1. Copy `.env.example` to `.env.local`.
+2. Set `NEXT_PUBLIC_GA_MEASUREMENT_ID` to your GA4 Measurement ID (for example: `G-ABC123XYZ9`).
+3. Restart the dev server after changing env vars.
+
 ## Build for Production
 
 ```bash
@@ -67,4 +73,3 @@ src/
     calculate.ts
     urlState.ts
 ```
-

@@ -1,17 +1,28 @@
-﻿"use client";
+"use client";
 
-import { MODEL_OPTIONS } from "@/data/pricing";
+import { DEFAULT_HEARTBEAT_MODEL, DEFAULT_PRIMARY_MODEL, MODEL_GROUPS } from "@/data/pricing";
 import type { CalculatorState, ThinkingMode } from "@/types/calculator";
-import { clampNumber } from "@/utils/calculate";
+import {
+  clampNumber,
+  type BillingMode,
+  type ExtendedCalculatorState,
+  type UsagePhase,
+  getModelBehavior,
+} from "@/utils/calculate";
 
 interface ModelSectionProps {
-  state: CalculatorState;
-  onChange: (next: Partial<CalculatorState>) => void;
+  state: ExtendedCalculatorState;
+  usagePercent: number;
+  onChange: (next: Partial<ExtendedCalculatorState>) => void;
 }
 
 const THINKING_OPTIONS: ThinkingMode[] = ["off", "low", "high"];
 
-export function ModelSection({ state, onChange }: ModelSectionProps) {
+export function ModelSection({ state, usagePercent, onChange }: ModelSectionProps) {
+  const billingMode: BillingMode = state.billingMode ?? "payg";
+  const usagePhase: UsagePhase = state.usagePhase ?? "steady";
+  const modelBehavior = getModelBehavior(state.primaryModel || DEFAULT_PRIMARY_MODEL);
+
   return (
     <section className="rounded-brand border bg-secondary/55 p-6">
       <h2 className="text-2xl font-bold">1. Model Cost Estimator</h2>
@@ -19,18 +30,109 @@ export function ModelSection({ state, onChange }: ModelSectionProps) {
         Estimate message spend by model, usage volume, and thinking intensity.
       </p>
 
+      <div className="mt-4 flex flex-wrap gap-2">
+        <button
+          type="button"
+          onClick={() => onChange({ billingMode: "payg" })}
+          className={`rounded-full px-4 py-2 text-sm font-semibold ${
+            billingMode === "payg"
+              ? "bg-primary text-primary-foreground"
+              : "border border-primary/30 text-foreground"
+          }`}
+        >
+          Pay-per-token API
+        </button>
+        <button
+          type="button"
+          onClick={() => onChange({ billingMode: "subscription" })}
+          className={`rounded-full px-4 py-2 text-sm font-semibold ${
+            billingMode === "subscription"
+              ? "bg-primary text-primary-foreground"
+              : "border border-primary/30 text-foreground"
+          }`}
+        >
+          Subscription / OAuth plan
+        </button>
+      </div>
+
+      {billingMode === "subscription" ? (
+        <p className="mt-3 rounded-brand border border-primary/20 bg-background/70 p-3 text-sm text-foreground">
+          ~{usagePercent.toFixed(1)}% of your daily rate limit. Dollar output suppressed for this section.
+        </p>
+      ) : null}
+
+      {modelBehavior.freeTier ? (
+        <p className="mt-3 rounded-brand border border-primary/20 bg-background/70 p-3 text-sm text-foreground">
+          Free tier - monitor rate limits instead of cost.
+        </p>
+      ) : null}
+
+      {modelBehavior.localCompute ? (
+        <div className="mt-3 rounded-brand border border-primary/20 bg-background/70 p-3">
+          <p className="text-sm text-foreground">Running locally - no API cost.</p>
+          <label className="mt-3 block text-sm">
+            <span className="mb-2 block font-semibold text-foreground">Estimated server cost per hour (optional)</span>
+            <input
+              type="number"
+              min={0}
+              step="0.01"
+              value={state.localServerCostPerHour ?? 0}
+              onChange={(event) =>
+                onChange({ localServerCostPerHour: clampNumber(Number(event.target.value)) })
+              }
+              className="w-full rounded-brand border bg-background px-3 py-2"
+            />
+          </label>
+        </div>
+      ) : null}
+
+      <div className="mt-4 flex flex-wrap gap-2">
+        <button
+          type="button"
+          onClick={() => onChange({ usagePhase: "steady" })}
+          className={`rounded-full px-4 py-2 text-sm font-semibold ${
+            usagePhase === "steady"
+              ? "bg-primary text-primary-foreground"
+              : "border border-primary/30 text-foreground"
+          }`}
+        >
+          Steady State
+        </button>
+        <button
+          type="button"
+          onClick={() => onChange({ usagePhase: "setup" })}
+          className={`rounded-full px-4 py-2 text-sm font-semibold ${
+            usagePhase === "setup"
+              ? "bg-primary text-primary-foreground"
+              : "border border-primary/30 text-foreground"
+          }`}
+        >
+          Setup / Experimentation
+        </button>
+      </div>
+
+      {usagePhase === "setup" ? (
+        <p className="mt-3 text-sm font-semibold text-accent">
+          Includes ~3x buffer for config iteration and test runs.
+        </p>
+      ) : null}
+
       <div className="mt-6 grid gap-5 md:grid-cols-2">
         <label className="text-sm">
           <span className="mb-2 block font-semibold text-foreground">Primary model</span>
           <select
-            value={state.primaryModel}
+            value={state.primaryModel || DEFAULT_PRIMARY_MODEL}
             onChange={(event) => onChange({ primaryModel: event.target.value })}
             className="w-full rounded-brand border bg-background px-3 py-2"
           >
-            {MODEL_OPTIONS.map((model) => (
-              <option key={model.id} value={model.id}>
-                {model.label}
-              </option>
+            {MODEL_GROUPS.map((group) => (
+              <optgroup key={group.label} label={group.label}>
+                {group.models.map((model) => (
+                  <option key={model.id} value={model.id}>
+                    {model.id}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
         </label>
@@ -38,14 +140,18 @@ export function ModelSection({ state, onChange }: ModelSectionProps) {
         <label className="text-sm">
           <span className="mb-2 block font-semibold text-foreground">Fallback model (optional)</span>
           <select
-            value={state.fallbackModel}
+            value={state.fallbackModel || DEFAULT_HEARTBEAT_MODEL}
             onChange={(event) => onChange({ fallbackModel: event.target.value })}
             className="w-full rounded-brand border bg-background px-3 py-2"
           >
-            {MODEL_OPTIONS.map((model) => (
-              <option key={model.id} value={model.id}>
-                {model.label}
-              </option>
+            {MODEL_GROUPS.map((group) => (
+              <optgroup key={group.label} label={group.label}>
+                {group.models.map((model) => (
+                  <option key={model.id} value={model.id}>
+                    {model.id}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
         </label>
@@ -111,4 +217,3 @@ export function ModelSection({ state, onChange }: ModelSectionProps) {
     </section>
   );
 }
-

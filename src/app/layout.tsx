@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import GoogleAnalytics  from "@/components/analytics/GoogleAnalytics";
 
 export const metadata: Metadata = {
   title: "GuardClaw - Open Source Tools for the OpenClaw Community",
@@ -31,7 +32,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased" suppressHydrationWarning>{children}</body>
+      <body className="antialiased" suppressHydrationWarning>
+        {children}
+        <GoogleAnalytics GA_MEASUREMENT_ID="G-9P4049TPFT" />
+      </body>
     </html>
   );
 }
