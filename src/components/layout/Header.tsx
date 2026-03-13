@@ -19,9 +19,9 @@ export function Header() {
         </Link>
 
         <nav className="flex items-center gap-5 text-sm font-semibold text-muted-foreground">
-          <Link href="/tools/openclaw-setup-cost-calculator" className="transition hover:text-foreground">
+          <a href={SOCIAL_LINKS.tools} target="_blank" className="transition hover:text-foreground">
             Tools
-          </Link>
+          </a>
           <Link
             href={SOCIAL_LINKS.github}
             target="_blank"
@@ -41,4 +41,3 @@ export function Header() {
     </header>
   );
 }
-

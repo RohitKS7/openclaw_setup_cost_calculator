@@ -5,7 +5,7 @@ import { SOCIAL_LINKS } from "@/data/ecosystem";
 const TOOL_LINKS = [
   {
     label: "Field Note #001 - OpenClaw Setup Cost Calculator",
-    href: "/tools/openclaw-token-calculator",
+    href: "/calculate",
   },
   {
     label: "More tools in progress",
@@ -56,4 +56,3 @@ export function Footer() {
     </footer>
   );
 }
-
