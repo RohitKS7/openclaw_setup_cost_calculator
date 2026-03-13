@@ -261,30 +261,32 @@ export function LandingPageContent() {
 
           <MotionSection className="grid gap-6 md:grid-cols-2">
             <article className="rounded-brand border bg-secondary/45 p-6">
-              <h2 className="text-2xl font-bold">GitHub Repository</h2>
+              <p className="text-2xl leading-none">⭐</p>
+              <h2 className="mt-4 text-2xl font-bold">Star on GitHub</h2>
               <p className="mt-3 text-muted-foreground">
-                Source code is open and maintained in public to keep pricing assumptions and logic transparent.
+                If this tool saved you money, a star helps others find it.
               </p>
               <Link
                 href={SOCIAL_LINKS.tool_github}
                 target="_blank"
                 className="mt-4 inline-flex rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground"
               >
-                View on GitHub
+                Star the repo →
               </Link>
             </article>
 
-            <article className="rounded-brand border bg-background/80 p-6">
-              <h2 className="text-2xl font-bold">Support the Builder</h2>
+            <article className="rounded-brand border border-accent bg-background/80 p-6">
+              <p className="text-2xl leading-none">💜</p>
+              <h2 className="mt-4 text-2xl font-bold">Sponsor the build</h2>
               <p className="mt-3 text-muted-foreground">
-                If this tool saved budget for your team, support maintenance and new Field Notes.
+                Support independent tools built for the OpenClaw community.
               </p>
               <Link
-                href={SOCIAL_LINKS.buyMeACoffee}
+                href="https://github.com/sponsors/RohitKS7"
                 target="_blank"
                 className="mt-4 inline-flex rounded-full bg-accent px-5 py-2 text-sm font-semibold text-accent-foreground"
               >
-                Buy Me A Coffee
+                Sponsor on GitHub →
               </Link>
             </article>
           </MotionSection>
@@ -299,6 +301,12 @@ export function LandingPageContent() {
                 <p className="text-lg font-semibold">Built by Rohit Kumar</p>
                 <p className="mt-2 text-muted-foreground">
                   Building practical tools in public for OpenClaw developers. Feedback and collaboration are welcome.
+                </p>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  If this tool was useful, a{" "}
+                  <Link href="https://github.com/RohitKS7" target="_blank" className="underline underline-offset-2">
+                    GitHub star genuinely helps. → github.com/RohitKS7
+                  </Link>
                 </p>
                 <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold">
                   <Link href={SOCIAL_LINKS.github} target="_blank" className="rounded-full border border-primary/30 px-4 py-2">

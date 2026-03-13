@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import GoogleAnalytics  from "@/components/analytics/GoogleAnalytics";
 
@@ -34,6 +35,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased" suppressHydrationWarning>
         {children}
+        <Analytics />
         <GoogleAnalytics GA_MEASUREMENT_ID="G-9P4049TPFT" />
       </body>
     </html>
