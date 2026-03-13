@@ -1,75 +1,138 @@
-﻿# GuardClaw Tools MVP
+# OpenClaw Token Cost Calculator
 
-MVP implementation of **Field Note #001 - OpenClaw Setup Cost Calculator** using Next.js App Router, TypeScript, Tailwind CSS, and Framer Motion.
+**Stop running blind. See what your OpenClaw setup actually costs — before it drains.**
 
-## Tech Stack
+A free, open-source calculator for OpenClaw developers to estimate daily and
+monthly token spend across models, heartbeats, fallback behaviour, and
+multi-agent setups. No account. No backend. Runs entirely in the browser.
 
-- Next.js (App Router)
-- TypeScript
-- Tailwind CSS
-- Framer Motion
+🔗 **[Try it live → calculator.guardclaw.dev](https://calculator.guardclaw.dev)**
 
-## Local Development
+---
+
+<!-- Add screenshot here: results summary card showing cost breakdown -->
+
+---
+
+## Why this exists
+
+Every week, the same thread appears in OpenClaw Discord.
+
+Someone's budget is gone. They don't know why.
+It wasn't one big thing. It was heartbeats firing every 30 minutes.
+A fallback model they forgot was set. A thinking mode left on high.
+
+None of it visible. All of it expensive.
+
+This tool exists because the feedback loop was missing.
+
+---
+
+## What it calculates
+
+| Section | What it covers |
+|---|---|
+| Model cost | Primary model spend per day and month across 40+ models |
+| Heartbeat budget | Token cost of heartbeat intervals at idle |
+| Fallback behaviour | Blended cost when sessions fall back to a secondary model |
+| Multi-agent mode | Total spend across simultaneous agents |
+
+---
+
+## Supported providers
+
+Anthropic · OpenAI · OpenAI Codex · Google Gemini · Moonshot (Kimi) ·
+MiniMax · Z.AI (GLM) · DeepSeek · xAI · Mistral · Volcano Engine ·
+BytePlus · Qwen · Kilo Gateway · OpenRouter · Ollama · vLLM
+
+Free-tier models (Codex OAuth, Qwen, Gemini CLI) are handled separately —
+rate-limit display instead of dollar cost.
+
+Local models (Ollama, vLLM) default to $0 with an optional compute cost input.
+
+---
+
+## Running locally
 
 ```bash
+git clone https://github.com/RohitKS7/openclaw-token-calculator
+cd openclaw-token-calculator
 npm install
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+Open [http://localhost:3000](http://localhost:3000).
 
-### Google Analytics (GA4)
+---
 
-1. Copy `.env.example` to `.env.local`.
-2. Set `NEXT_PUBLIC_GA_MEASUREMENT_ID` to your GA4 Measurement ID (for example: `G-ABC123XYZ9`).
-3. Restart the dev server after changing env vars.
+## Updating pricing data
 
-## Build for Production
+All model prices live in one file:
 
-```bash
-npm run build
-npm run start
+```
+src/lib/pricing.js
 ```
 
-## Deploy (Vercel)
+Each entry follows this structure:
 
-1. Push this repository to GitHub.
-2. Import the repo in Vercel.
-3. Framework preset: **Next.js**.
-4. Build command: `npm run build`.
-5. Output: default Next.js output.
-6. Deploy and connect your custom domain/subpath (e.g. `guardclaw.dev/tools/openclaw-token-calculator`).
+```js
+"provider/model-id": { input: 0.00, output: 0.00 }
 
-## Project Structure
+// Free tier models
+"provider/model-id": { free: true, rateLimitOnly: true }
 
-```text
-src/
-  app/
-    layout.tsx
-    page.tsx
-    tools/openclaw-token-calculator/page.tsx
-    globals.css
-  components/
-    layout/
-      Header.tsx
-      Footer.tsx
-      ToolLayout.tsx
-    calculator/
-      AnimatedCurrency.tsx
-      ModelSection.tsx
-      HeartbeatSection.tsx
-      SummaryCard.tsx
-      ShareButton.tsx
-      ToolPageContent.tsx
-    shared/
-      MotionSection.tsx
-  data/
-    pricing.ts
-    defaults.ts
-    ecosystem.ts
-  types/
-    calculator.ts
-  utils/
-    calculate.ts
-    urlState.ts
+// Local models
+"provider/model-id": { input: 0, output: 0, localCompute: true }
 ```
+
+Prices are in USD per million tokens.
+A `PRICING_LAST_UPDATED` constant at the top of the file tracks
+when prices were last verified.
+
+If you spot a price that's out of date, a PR updating `pricing.js`
+is the most useful contribution you can make.
+
+---
+
+## Tech stack
+
+- **Framework:** Next.js (static export)
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Deployment:** Vercel
+- **Backend:** None
+
+---
+
+## Part of the GuardClaw ecosystem
+
+This tool is Field Note #001 in the GuardClaw toolkit —
+a collection of free, open-source tools for OpenClaw developers.
+
+🌐 [guardclaw.dev](https://guardclaw.dev)
+
+More tools in the build queue. Follow along:
+[@SumanRohitK7](https://twitter.com/SumanRohitK7)
+
+---
+
+## Contributing
+
+Pricing updates, bug reports, and new provider suggestions are welcome.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for how to help.
+
+---
+
+## Support
+
+If this tool saved you money, a GitHub star helps others find it.
+
+⭐ [Star this repo](https://github.com/RohitKS7/openclaw-token-calculator)
+💜 [Sponsor on GitHub](https://github.com/sponsors/RohitKS7)
+
+---
+
+*Built in public by [Rohit Kumar](https://twitter.com/SumanRohitK7).
+Free forever. Open source.*
+
+---

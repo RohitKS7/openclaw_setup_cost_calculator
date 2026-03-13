@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -10,44 +11,57 @@ import { MotionSection } from "@/components/shared/MotionSection";
 import { SOCIAL_LINKS } from "@/data/ecosystem";
 
 import { AnimatedCountUp } from "./AnimatedCountUp";
+import {
+  FallbackBehaviourIcon,
+  HeartbeatBudgetIcon,
+  ModelCostIcon,
+  MultiAgentModeIcon,
+} from "./CalculatorCoverageIcons";
 
 const communityQuotes = [
   {
     quote: "Spent $25 in 10 minutes in a loop.",
-    source: "Discord — #users-helping-users",
+    source: "Discord \u2014 #general",
   },
   {
     quote: "Burned through my $200 plan in under an hour.",
-    source: "Discord — #general",
+    source: "Reddit \u2014 r/openclaw",
   },
   {
     quote: "Drained my Codex weekly limit in a single afternoon.",
-    source: "Discord — #general",
+    source: "X \u2014 @openclaw",
   },
   {
     quote: "How are you supposed to use this without going broke?",
-    source: "Discord — #users-helping-users",
+    source: "Discord \u2014 #users-helping-users",
   },
+];
+
+const heroCardRotations = [
+  { desktop: -1.5, mobile: -0.5 },
+  { desktop: 1, mobile: 0.5 },
+  { desktop: -0.8, mobile: -0.4 },
+  { desktop: 1.2, mobile: 0.5 },
 ];
 
 const calculatorCoverage = [
   {
-    icon: "🧠",
+    icon: <ModelCostIcon className="h-12 w-12" />,
     label: "Model cost",
     description: "Primary and fallback model spend per day and month",
   },
   {
-    icon: "💓",
+    icon: <HeartbeatBudgetIcon className="h-12 w-12" />,
     label: "Heartbeat budget",
     description: "How much your heartbeat interval costs at idle",
   },
   {
-    icon: "🔀",
+    icon: <FallbackBehaviourIcon className="h-12 w-12" />,
     label: "Fallback behaviour",
     description: "Blended cost when sessions fall back to a cheaper model",
   },
   {
-    icon: "🤖",
+    icon: <MultiAgentModeIcon className="h-12 w-12" />,
     label: "Multi-agent mode",
     description: "Total spend across simultaneous agents",
   },
@@ -72,79 +86,122 @@ const previewCards = [
 ];
 
 export function LandingPageContent() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const updateIsMobile = () => setIsMobile(window.innerWidth < 768);
+
+    updateIsMobile();
+    window.addEventListener("resize", updateIsMobile);
+
+    return () => window.removeEventListener("resize", updateIsMobile);
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Header />
       <main className="pb-8">
-        <section className="container-brand py-14 md:py-20">
-          <div className="max-w-4xl rounded-[2rem] border border-border/80 bg-background/80 p-8 shadow-[0_24px_80px_-48px_rgba(30,72,54,0.45)] backdrop-blur-sm md:p-12">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="max-w-3xl text-4xl font-bold leading-tight md:text-6xl"
-            >
-              Running blind is the default state for OpenClaw users.
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, ease: "easeOut", delay: 0.1 }}
-              className="mt-5 max-w-2xl text-lg text-muted-foreground md:text-xl"
-            >
-              Paste your model config, heartbeat settings, and fallback behaviour to see your real daily and monthly
-              cost — before it drains.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, ease: "easeOut", delay: 0.2 }}
-              className="mt-8"
-            >
-              <motion.div
-                animate={{ scale: [1, 1.03, 1] }}
-                transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
-                className="inline-flex"
+        <section className="container-brand flex min-h-[calc(100vh-10rem)] items-center py-10 md:py-12">
+          <div className="grid w-full gap-12 md:grid-cols-[minmax(0,55%)_minmax(0,45%)] md:items-center">
+            <div className="flex max-w-[40rem] flex-col justify-center">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="text-[2.25rem] font-bold leading-[1.15] text-foreground md:text-[3.5rem]"
               >
-                <Link
-                  href="/calculate"
-                  className="rounded-full bg-accent px-6 py-3 text-base font-semibold text-accent-foreground shadow-[0_12px_28px_-16px_rgba(191,95,43,0.8)] transition hover:opacity-95"
+                <span className="relative inline-block">
+                  <span>Running blind</span>
+                  <motion.svg
+                    aria-hidden="true"
+                    viewBox="0 0 260 22"
+                    className="pointer-events-none absolute left-0 top-full mt-1 h-4 w-[105%] overflow-visible"
+                  >
+                    <motion.path
+                      d="M3 13C35 18 61 5 91 10C125 15 157 18 190 10C215 4 236 7 257 11"
+                      fill="none"
+                      stroke="hsl(var(--accent))"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ duration: 0.6, ease: "easeInOut", delay: 0.4 }}
+                    />
+                  </motion.svg>
+                </span>{" "}
+                is the default state for OpenClaw users.
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease: "easeOut", delay: 0.15 }}
+                className="mt-6 max-w-[30rem] text-[1.125rem] text-muted-foreground"
+              >
+                Paste your model config, heartbeat settings, and fallback behaviour to see your real daily and monthly
+                cost {"\u2014"} <br />
+                before it drains.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease: "easeOut", delay: 0.25 }}
+                className="mt-8"
+              >
+                <motion.div
+                  animate={{ scale: [1, 1.03, 1] }}
+                  transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
+                  whileHover={{ scale: 1.05, filter: "brightness(1.05)" }}
+                  className="inline-flex"
                 >
-                  Calculate my setup cost →
-                </Link>
+                  <Link
+                    href="/calculate"
+                    className="rounded-full bg-accent px-8 py-4 text-base font-semibold text-accent-foreground transition"
+                  >
+                    {"Calculate my setup cost \u2192"}
+                  </Link>
+                </motion.div>
               </motion.div>
-            </motion.div>
+            </div>
+
+            <div className="relative">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground md:hidden">
+                The problem, in their words
+              </p>
+              <p className="absolute left-0 top-1/2 hidden -translate-x-[1.9rem] -translate-y-[-5rem] -rotate-90 origin-bottom-left text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-muted-foreground md:block">
+                The problem, in their words
+              </p>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                {communityQuotes.map((item, index) => (
+                  <motion.article
+                    key={item.quote}
+                    initial={{ opacity: 0, y: 16, rotate: 0 }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      rotate: isMobile ? heroCardRotations[index].mobile : heroCardRotations[index].desktop,
+                    }}
+                    transition={{ duration: 0.35, ease: "easeOut", delay: index * 0.08 }}
+                    whileHover={{
+                      y: -5,
+                      boxShadow: "0 8px 30px rgba(0,0,0,0.13)",
+                    }}
+                    className="rounded-[6px] bg-secondary px-6 py-5 shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+                  >
+                    <p className="font-serif text-[1.35rem] italic leading-relaxed text-foreground">{item.quote}</p>
+                    <p className="mt-4 text-xs font-semibold tracking-[0.16em] text-muted-foreground [font-variant:small-caps]">
+                      {item.source}
+                    </p>
+                  </motion.article>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
         <div className="container-brand space-y-8 pb-12">
-          <MotionSection className="space-y-5">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-              Community proof
-            </p>
-            <div className="grid gap-4 md:grid-cols-2">
-              {communityQuotes.map((item, index) => (
-                <motion.article
-                  key={item.quote}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.3, ease: "easeOut", delay: index * 0.08 }}
-                  whileHover={{
-                    y: -4,
-                    boxShadow: "0 18px 30px -24px rgba(30, 72, 54, 0.5)",
-                  }}
-                  className="rounded-brand border border-border bg-secondary p-6"
-                >
-                  <p className="font-serif text-xl italic leading-relaxed">{item.quote}</p>
-                  <p className="mt-4 text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                    {item.source}
-                  </p>
-                </motion.article>
-              ))}
-            </div>
-          </MotionSection>
-
           <MotionSection className="space-y-5">
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
               What the calculator covers
@@ -203,7 +260,10 @@ export function LandingPageContent() {
           <MotionSection className="rounded-brand border bg-secondary/45 p-6">
             <h2 className="text-2xl font-bold">Why This Tool Exists</h2>
             <p className="mt-3 text-muted-foreground">
-             Every week, the same thread appears in OpenClaw Discord. Someone's budget is gone. They don't know why. It wasn't one big thing. It was heartbeats firing every 30 minutes. A fallback model they forgot was set. A thinking mode left on high. None of it visible. All of it expensive. This tool exists because the feedback loop was missing. Now it isn't.
+              Every week, the same thread appears in OpenClaw Discord. Someone&apos;s budget is gone. They don&apos;t
+              know why. It wasn&apos;t one big thing. It was heartbeats firing every 30 minutes. A fallback model they
+              forgot was set. A thinking mode left on high. None of it visible. All of it expensive. This tool exists
+              because the feedback loop was missing. Now it isn&apos;t.
             </p>
             <p className="mt-3 text-sm text-muted-foreground">
               Observed from community pain in Discord and GitHub threads discussing unexpected token burn.
@@ -211,9 +271,7 @@ export function LandingPageContent() {
           </MotionSection>
 
           <MotionSection className="rounded-brand border bg-background/85 p-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-              Field Note #002
-            </p>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">Field Note #002</p>
             <div className="mt-4 flex flex-wrap items-start justify-between gap-5">
               <div className="max-w-2xl">
                 <div className="inline-flex overflow-hidden rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-accent">
@@ -221,8 +279,8 @@ export function LandingPageContent() {
                 </div>
                 <h2 className="mt-4 text-3xl font-bold">OpenClaw Model Picker</h2>
                 <p className="mt-3 text-muted-foreground">
-                  Every new OpenClaw user hits the same wall: which model should I use, and what will it cost?
-                  This tool asks what you&apos;re trying to do and gives you a clear answer. No Discord thread required.
+                  Every new OpenClaw user hits the same wall: which model should I use, and what will it cost? This
+                  tool asks what you&apos;re trying to do and gives you a clear answer. No Discord thread required.
                 </p>
               </div>
               <Link
@@ -230,7 +288,7 @@ export function LandingPageContent() {
                 target="_blank"
                 className="rounded-full border border-primary/30 px-5 py-2 text-sm font-semibold transition hover:bg-primary hover:text-primary-foreground"
               >
-                Follow on Twitter →
+                {"Follow on Twitter \u2192"}
               </Link>
             </div>
           </MotionSection>
@@ -263,30 +321,26 @@ export function LandingPageContent() {
             <article className="rounded-brand border bg-secondary/45 p-6">
               <p className="text-2xl leading-none">⭐</p>
               <h2 className="mt-4 text-2xl font-bold">Star on GitHub</h2>
-              <p className="mt-3 text-muted-foreground">
-                If this tool saved you money, a star helps others find it.
-              </p>
+              <p className="mt-3 text-muted-foreground">If this tool saved you money, a star helps others find it.</p>
               <Link
                 href={SOCIAL_LINKS.tool_github}
                 target="_blank"
                 className="mt-4 inline-flex rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground"
               >
-                Star the repo →
+                {"Star the repo \u2192"}
               </Link>
             </article>
 
             <article className="rounded-brand border border-accent bg-background/80 p-6">
-              <p className="text-2xl leading-none">💜</p>
+              <p className="text-2xl leading-none">💞</p>
               <h2 className="mt-4 text-2xl font-bold">Sponsor the build</h2>
-              <p className="mt-3 text-muted-foreground">
-                Support independent tools built for the OpenClaw community.
-              </p>
+              <p className="mt-3 text-muted-foreground">Support independent tools built for the OpenClaw community.</p>
               <Link
                 href="https://github.com/sponsors/RohitKS7"
                 target="_blank"
                 className="mt-4 inline-flex rounded-full bg-accent px-5 py-2 text-sm font-semibold text-accent-foreground"
               >
-                Sponsor on GitHub →
+                {"Sponsor on GitHub \u2192"}
               </Link>
             </article>
           </MotionSection>
@@ -295,7 +349,13 @@ export function LandingPageContent() {
             <h2 className="text-2xl font-bold">Builder Identity</h2>
             <div className="mt-4 grid gap-6 md:grid-cols-[220px_1fr] md:items-center">
               <div className="overflow-hidden rounded-brand border border-primary/20">
-                <Image src="/headshot-bg.png" alt="Rohit Kumar" width={640} height={640} className="h-full w-full object-cover" />
+                <Image
+                  src="/headshot-bg.png"
+                  alt="Rohit Kumar"
+                  width={640}
+                  height={640}
+                  className="h-full w-full object-cover"
+                />
               </div>
               <div>
                 <p className="text-lg font-semibold">Built by Rohit Kumar</p>
@@ -305,7 +365,7 @@ export function LandingPageContent() {
                 <p className="mt-3 text-sm text-muted-foreground">
                   If this tool was useful, a{" "}
                   <Link href="https://github.com/RohitKS7" target="_blank" className="underline underline-offset-2">
-                    GitHub star genuinely helps. → github.com/RohitKS7
+                    {"GitHub star genuinely helps. \u2192 github.com/RohitKS7"}
                   </Link>
                 </p>
                 <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold">
