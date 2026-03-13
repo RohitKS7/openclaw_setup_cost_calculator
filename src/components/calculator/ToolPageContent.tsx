@@ -11,6 +11,7 @@ import { ModelSection } from "@/components/calculator/ModelSection";
 import { MultiAgentSection } from "@/components/calculator/MultiAgentSection";
 import { ShareButton } from "@/components/calculator/ShareButton";
 import { SummaryCard } from "@/components/calculator/SummaryCard";
+import { ShareResult } from "@/components/ShareResult";
 import { ToolLayout } from "@/components/layout/ToolLayout";
 import { MotionSection } from "@/components/shared/MotionSection";
 import { DEFAULT_CALCULATOR_STATE } from "@/data/defaults";
@@ -242,6 +243,13 @@ export function ToolPageContent() {
                 tips={costTips}
                 savedMonthlyDiff={savedMonthlyDiff}
                 onApplyTip={applyTip}
+              />
+
+              <ShareResult
+                primaryModel={state.primaryModel}
+                heartbeatInterval={state.heartbeatInterval}
+                avgInputTokens={state.avgInputTokens}
+                estimatedMonthlyCost={composedMetrics.totalMonthlyCost}
               />
 
               <FallbackSection state={state} metrics={fallbackMetrics} onChange={updateState} />

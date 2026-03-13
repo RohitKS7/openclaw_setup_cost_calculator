@@ -154,6 +154,9 @@ export function ModelSection({ state, usagePercent, onChange }: ModelSectionProp
               </optgroup>
             ))}
           </select>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Need a more accurate fallback estimate? Use Section 4 to set fallback frequency and view blended daily/monthly cost.
+          </p>
         </label>
 
         <label className="text-sm md:col-span-2">
