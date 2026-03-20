@@ -124,7 +124,7 @@ export function ShareResult({
       transition={{ duration: 0.25, ease: "easeOut" }}
     >
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h3 className="text-2xl font-bold">Share Your Results With Community Members</h3>
+        <h3 className="text-2xl font-bold">Compare setups. Share with others. Avoid expensive mistakes.</h3>
         <p className="text-xs text-muted-foreground">Future permalink: /token-calculator/result?config=&lt;encoded-data&gt;</p>
       </div>
 
@@ -174,7 +174,7 @@ export function ShareResult({
       </motion.article>
 
       <p className="mt-4 text-sm text-muted-foreground">
-        Built with GuardClaw tools for OpenClaw developers.
+        Built by Rohit under GuardClaw tools for OpenClaw Users.
       </p>
     </motion.section>
   );

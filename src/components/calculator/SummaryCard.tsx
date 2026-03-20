@@ -50,11 +50,15 @@ export function SummaryCard({
   savedMonthlyDiff,
   onApplyTip,
 }: SummaryCardProps) {
+  // Yearly based on the existing "month" estimate so the sentence stays consistent
+  // with the calculator's monthly billing assumptions.
+  const totalYearlyCost = totalMonthlyCost * 12;
+
   return (
     <section className="rounded-brand border bg-background p-6 shadow-sm">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold">3. Total Cost Summary</h2>
+          <h2 className="text-2xl font-bold">3. Total Cost Summary (What you'll actually pay)</h2>
           <p className="mt-2 text-sm text-muted-foreground">
             Combined estimate across message traffic, heartbeats, and background tasks.
           </p>
@@ -84,7 +88,22 @@ export function SummaryCard({
         </div>
       </div>
 
+      <div className="mt-2 text-[10px] text-muted-foreground leading-snug">
+        <span className="mt-1 block">
+          *This is an estimate — real usage may vary based on session size and agent behavior.
+        </span>
+      </div>
+
+      <p className="mt-3 italic text-base text-muted-foreground">
+        At this rate, you'll spend{" "}
+        <span className=" font-bold text-accent">~{formatCurrency(totalMonthlyCost)}/month</span> and{" "}
+        <span className=" font-bold text-accent">~{formatCurrency(totalYearlyCost)}/year</span> on this setup.
+      </p>
+
       <div className="mt-6">
+        <p className="mb-2 text-xs uppercase tracking-wide text-muted-foreground">
+          Where your cost comes from
+        </p>
         <div className="h-3 overflow-hidden rounded-full border border-primary/20 bg-muted">
           <div className="flex h-full">
             <div className="bg-primary" style={{ width: `${breakdown.messages * 100}%` }} />

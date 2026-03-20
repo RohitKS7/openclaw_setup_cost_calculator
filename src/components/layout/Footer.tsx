@@ -4,8 +4,8 @@ import { SOCIAL_LINKS } from "@/data/ecosystem";
 
 const TOOL_LINKS = [
   {
-    label: "Field Note #001 - OpenClaw Setup Cost Calculator",
-    href: "/calculate",
+    label: "Field Note #002 - OpenClaw Model Picker",
+    href: SOCIAL_LINKS.tool_modelpicker,
   },
   {
     label: "More tools in progress",
@@ -20,7 +20,7 @@ export function Footer() {
         <div>
           <h3 className="text-xl font-semibold">GuardClaw Ecosystem</h3>
           <p className="mt-2 text-sm text-muted-foreground">
-            Part of the GuardClaw ecosystem - free tools for OpenClaw Users and Developers.
+          GuardClaw is built in public by Rohit. Each tool starts from a real problem. More are coming.
           </p>
         </div>
 
@@ -44,12 +44,10 @@ export function Footer() {
             </Link>
           </p>
           <p>
-            <Link href={SOCIAL_LINKS.buyMeACoffee} target="_blank" className="hover:text-foreground">
-              Buy Me A Coffee
-            </Link>
+            <Link href={SOCIAL_LINKS.twitter} target="_blank" className="hover:text-foreground">Follow My Journey @SumanRohitK7</Link>
           </p>
           <p>
-            Built by · <Link href={SOCIAL_LINKS.twitter} target="_blank" className="hover:text-foreground">@SumanRohitK7</Link>
+            Built by Rohit Kumar Suman
           </p>
         </div>
       </div>

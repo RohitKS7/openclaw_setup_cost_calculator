@@ -25,7 +25,7 @@ export function ModelSection({ state, usagePercent, onChange }: ModelSectionProp
 
   return (
     <section className="rounded-brand border bg-secondary/55 p-6">
-      <h2 className="text-2xl font-bold">1. Model Cost Estimator</h2>
+      <h2 className="text-2xl font-bold">1. Model Cost (Your main spend)</h2>
       <p className="mt-2 text-sm text-muted-foreground">
         Estimate message spend by model, usage volume, and thinking intensity.
       </p>
@@ -154,8 +154,8 @@ export function ModelSection({ state, usagePercent, onChange }: ModelSectionProp
               </optgroup>
             ))}
           </select>
-          <p className="mt-2 text-xs text-muted-foreground">
-            Need a more accurate fallback estimate? Use Section 4 to set fallback frequency and view blended daily/monthly cost.
+          <p className="mt-2 text-[10px] text-muted-foreground">
+            *Need a more accurate fallback estimate? Use Section 4 to set fallback frequency and view blended daily/monthly cost.
           </p>
         </label>
 

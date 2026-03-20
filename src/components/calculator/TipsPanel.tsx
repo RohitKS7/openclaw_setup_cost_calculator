@@ -64,7 +64,7 @@ export function TipsPanel({ tips, savedMonthlyDiff, onApplyTip }: TipsPanelProps
       ) : null}
 
       <div className="rounded-brand border bg-background/80 p-5">
-        <p className="text-base font-semibold">Not sure which model fits your workflow?</p>
+        <p className="text-base font-semibold">You’re likely overpaying right now. Find a cheaper setup in seconds:</p>
         <p className="mt-1 text-sm text-muted-foreground">
           The GuardClaw Model Picker recommends a full primary + fallback stack based on your use case.
         </p>

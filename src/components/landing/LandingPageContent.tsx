@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { AnnouncementBar } from "@/components/shared/AnnouncementBar";
 import { MotionSection } from "@/components/shared/MotionSection";
 import { SOCIAL_LINKS } from "@/data/ecosystem";
 
@@ -48,40 +49,40 @@ const calculatorCoverage = [
   {
     icon: <ModelCostIcon className="h-12 w-12" />,
     label: "Model cost",
-    description: "Primary and fallback model spend per day and month",
+    description: "Where your money actually goes",
   },
   {
     icon: <HeartbeatBudgetIcon className="h-12 w-12" />,
     label: "Heartbeat budget",
-    description: "How much your heartbeat interval costs at idle",
+    description: "Silent cost while idle",
   },
   {
     icon: <FallbackBehaviourIcon className="h-12 w-12" />,
     label: "Fallback behaviour",
-    description: "Blended cost when sessions fall back to a cheaper model",
+    description: "Hidden cost switches",
   },
   {
     icon: <MultiAgentModeIcon className="h-12 w-12" />,
     label: "Multi-agent mode",
-    description: "Total spend across simultaneous agents",
+    description: "Seen across Discord, Reddit, and X",
   },
 ];
 
 const previewCards = [
   {
     value: 38,
-    before: "Your heartbeat alone costs ",
+    before: "Your heartbeat alone is costing you ",
     after: "/month",
   },
   {
     value: 200,
-    before: "At this rate you'll drain your ",
-    after: " plan in 4 hours",
+    before: "You'll drain your ",
+    after: " plan in ~4 hours",
   },
   {
     value: 22,
-    before: "Switching to Kimi as your fallback saves you ",
-    after: "/month",
+    before: "Switching fallback saves ",
+    after: "/month instantly",
   },
 ];
 
@@ -100,6 +101,13 @@ export function LandingPageContent() {
   return (
     <div className="min-h-screen">
       <Header />
+      <AnnouncementBar
+        badge="COMING SOON"
+        message="Field Note #002 — OpenClaw Model Picker is coming soon."
+        linkLabel="Follow along →"
+        linkHref={SOCIAL_LINKS.twitter}
+        external
+      />
       <main className="pb-8">
         <section className="container-brand flex min-h-[calc(100vh-10rem)] items-center py-10 md:py-12">
           <div className="grid w-full gap-12 md:grid-cols-[minmax(0,55%)_minmax(0,45%)] md:items-center">
@@ -163,15 +171,26 @@ export function LandingPageContent() {
                   </Link>
                 </motion.div>
               </motion.div>
+
+              <p className="mt-4 text-sm text-muted-foreground">
+                Built by{" "}
+                <Link href={SOCIAL_LINKS.github} target="_blank" className="hover:text-foreground transition">
+                  Rohit
+                </Link>{" "}
+                • Part of{" "}
+                <Link href={SOCIAL_LINKS.tools} target="_blank" className="hover:text-foreground transition">
+                  GuardClaw toolkit
+                </Link>
+              </p>
             </div>
 
             <div className="relative">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground md:hidden">
-                The problem, in their words
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground text-center ">
+              Seen across Discord, Reddit, and X
               </p>
-              <p className="absolute left-0 top-1/2 hidden -translate-x-[1.9rem] -translate-y-[-5rem] -rotate-90 origin-bottom-left text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-muted-foreground md:block">
+              {/* <p className="absolute left-0 top-1/2 hidden -translate-x-[1.9rem] -translate-y-[-5rem] -rotate-90 origin-bottom-left text-[0.7rem] font-semibold uppercase tracking-[0.15em] text-muted-foreground md:block">
                 The problem, in their words
-              </p>
+              </p> */}
 
               <div className="grid gap-4 sm:grid-cols-2">
                 {communityQuotes.map((item, index) => (
@@ -259,63 +278,102 @@ export function LandingPageContent() {
 
           <MotionSection className="rounded-brand border bg-secondary/45 p-6">
             <h2 className="text-2xl font-bold">Why This Tool Exists</h2>
-            <p className="mt-3 text-muted-foreground">
-              Every week, the same thread appears in OpenClaw Discord. Someone&apos;s budget is gone. They don&apos;t
-              know why. It wasn&apos;t one big thing. It was heartbeats firing every 30 minutes. A fallback model they
-              forgot was set. A thinking mode left on high. None of it visible. All of it expensive. This tool exists
-              because the feedback loop was missing. Now it isn&apos;t.
+            <p className="mt-3 whitespace-pre-line text-muted-foreground">
+              {`Every week, the same pattern shows up in OpenClaw communities:
+
+Someone’s budget is gone.
+They don’t know why.
+
+It’s not one big mistake.
+It’s small things:
+
+• Heartbeats firing every 30 minutes
+• A fallback model left on
+• Thinking mode running silently
+
+None of it visible.
+All of it expensive.
+
+This tool exists to make that visible — before it costs you.
+
+— Rohit`}
             </p>
-            <p className="mt-3 text-sm text-muted-foreground">
+            <p className="mt-3 text-xs text-muted-foreground">
               Observed from community pain in Discord and GitHub threads discussing unexpected token burn.
             </p>
-          </MotionSection>
+          </MotionSection> 
 
-          <MotionSection className="rounded-brand border bg-background/85 p-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">Field Note #002</p>
-            <div className="mt-4 flex flex-wrap items-start justify-between gap-5">
-              <div className="max-w-2xl">
-                <div className="inline-flex overflow-hidden rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-                  <span className="coming-soon-shimmer">Coming soon</span>
+<MotionSection>
+
+          <p className="mt-3 mb-10 text-accent font-semibold text-center italic whitespace-pre-line text-xl leading-tight ">
+            {`"This is just one piece.
+
+More tools are coming to solve the rest." — Rohit`}
+          </p>
+</MotionSection>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            <MotionSection className="rounded-brand border bg-background/85 p-6">
+            <div className="flex justify-between">
+
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                Field Note #002
+              </p>
+              <div className="inline-flex overflow-hidden rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+                    <span className="coming-soon-shimmer">Coming soon</span>
+                  </div>
+            </div>
+              <div className=" flex flex-wrap items-start justify-between gap-5">
+                <div className="max-w-2xl">
+                  <h2 className="mt-4 text-2xl font-bold">OpenClaw Model Picker</h2>
+                  <p className="mt-3 text-muted-foreground text-base">
+                    Every new OpenClaw user hits the same wall: which model should I use, and what will it cost? This
+                    tool asks what you&apos;re trying to do and gives you a clear answer. No Discord thread required.
+                  </p>
                 </div>
-                <h2 className="mt-4 text-3xl font-bold">OpenClaw Model Picker</h2>
-                <p className="mt-3 text-muted-foreground">
-                  Every new OpenClaw user hits the same wall: which model should I use, and what will it cost? This
-                  tool asks what you&apos;re trying to do and gives you a clear answer. No Discord thread required.
-                </p>
+                <Link
+                  href={SOCIAL_LINKS.twitter}
+                  target="_blank"
+                  className="rounded-full border border-primary/30 px-5 py-2 text-sm font-semibold transition hover:bg-primary hover:text-primary-foreground"
+                >
+                  {"Follow on Twitter \u2192"}
+                </Link>
               </div>
-              <Link
-                href={SOCIAL_LINKS.twitter}
-                target="_blank"
-                className="rounded-full border border-primary/30 px-5 py-2 text-sm font-semibold transition hover:bg-primary hover:text-primary-foreground"
-              >
-                {"Follow on Twitter \u2192"}
-              </Link>
-            </div>
-          </MotionSection>
+            </MotionSection>
 
-          <MotionSection className="rounded-brand border bg-background/80 p-6">
-            <h2 className="text-2xl font-bold">GuardClaw Ecosystem</h2>
-            <p className="mt-3 text-muted-foreground">
-              This tool is part of the GuardClaw ecosystem. GuardClaw ships focused, free utilities that solve real
-              OpenClaw developer problems and connect into a single trusted toolkit.
-            </p>
-            <div className="mt-4 flex flex-wrap gap-3">
-              <Link
-                href={SOCIAL_LINKS.website}
-                target="_blank"
-                className="rounded-full border border-primary/30 px-5 py-2 text-sm font-semibold transition hover:bg-primary hover:text-primary-foreground"
-              >
-                Visit Ecosystem Hub
-              </Link>
-              <Link
-                href={SOCIAL_LINKS.tools}
-                target="_blank"
-                className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground"
-              >
-                Explore GuardClaw Tools
-              </Link>
-            </div>
-          </MotionSection>
+            <MotionSection className="rounded-brand border bg-background/80 p-6">
+            <div className="flex flex-col justify-between h-full">
+              <div>
+
+              <h2 className="text-2xl font-bold">GuardClaw Ecosystem</h2>
+              <p className="mt-3 text-muted-foreground">
+                GuardClaw is a growing set of small tools built around real problems OpenClaw users face. Each
+                tool solves one specific issue. Together, they form a usable system.
+              </p>
+              <p className="mt-3 text-sm text-muted-foreground">
+                # Built in public by Rohit Kumar Suman
+              </p>
+              </div>
+           
+              <div className="mt-4 flex flex-wrap gap-3">
+                <Link
+                  href={SOCIAL_LINKS.website}
+                  target="_blank"
+                  className="rounded-full border border-primary/30 px-5 py-2 text-sm font-semibold transition hover:bg-primary hover:text-primary-foreground"
+                >
+                  Visit Ecosystem Hub
+                </Link>
+                <Link
+                  href={SOCIAL_LINKS.tools}
+                  target="_blank"
+                  className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground"
+                >
+                  Explore GuardClaw Tools
+                </Link>
+              </div>
+              </div>
+            </MotionSection>
+          </div>
 
           <MotionSection className="grid gap-6 md:grid-cols-2">
             <article className="rounded-brand border bg-secondary/45 p-6">
@@ -360,7 +418,7 @@ export function LandingPageContent() {
               <div>
                 <p className="text-lg font-semibold">Built by Rohit Kumar</p>
                 <p className="mt-2 text-muted-foreground">
-                  Building practical tools in public for OpenClaw developers. Feedback and collaboration are welcome.
+                I build tools based on repeated problems I see in OpenClaw communities. Then I ship them fast. Feedback shapes what comes next.
                 </p>
                 <p className="mt-3 text-sm text-muted-foreground">
                   If this tool was useful, a{" "}

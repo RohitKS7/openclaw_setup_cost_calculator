@@ -5,7 +5,8 @@
   github: "https://github.com/RohitKS7",
   buyMeACoffee: "https://www.buymeacoffee.com/rohitks7",
   tools: "https://guardclaw.dev/tools",
-  tool_github:"https://github.com/RohitKS7/openclaw_setup_cost_calculator"
+  tool_github:"https://github.com/RohitKS7/openclaw_setup_cost_calculator",
+  tool_modelpicker:"https://picker.guardclaw.dev"
 };
 
 export const FUTURE_TOOLS = [

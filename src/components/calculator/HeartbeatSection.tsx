@@ -28,7 +28,7 @@ export function HeartbeatSection({
 }: HeartbeatSectionProps) {
   return (
     <section className="rounded-brand border bg-secondary/55 p-6">
-      <h2 className="text-2xl font-bold">2. Heartbeat Budget Calculator</h2>
+      <h2 className="text-2xl font-bold">2. Heartbeat Budget Calculator (Runs even when idle)</h2>
       <p className="mt-2 text-sm text-muted-foreground">
         Heartbeats can silently dominate cost. Keep this budget visible.
       </p>
