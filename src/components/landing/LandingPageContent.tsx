@@ -27,7 +27,7 @@ const communityQuotes = [
     source: "X - @openclaw",
   },
   {
-    quote: "How are you supposed to use this without going broke?",
+    quote: "How are you supposed to use openclaw without going broke?",
     source: "Discord - #users-helping-users",
   },
 ];
@@ -113,7 +113,10 @@ export function LandingPageContent() {
               <p className="mt-6 max-w-[30rem] text-[1.125rem] text-muted-foreground">
                 Paste your model config, heartbeat settings, and fallback behaviour to see your real daily and monthly
                 cost - <br />
-                before it drains.
+                before it drains. <br />
+                <span className="text-xs"> 
+                Free and open source. No paywalls. No hidden limits. No account. No data stored. Runs entirely in your browser.
+                  </span>
               </p>
 
               <div className="mt-8">
@@ -174,6 +177,9 @@ export function LandingPageContent() {
                 </article>
               ))}
             </div>
+              <span className="text-sm text-muted-foreground">
+              No account. No data stored. Runs entirely in your browser.
+              </span>
           </section>
 
           <section className="space-y-5">
