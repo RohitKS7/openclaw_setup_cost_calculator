@@ -4,10 +4,10 @@ import "./globals.css";
 import GoogleAnalytics  from "@/components/analytics/GoogleAnalytics";
 
 export const metadata: Metadata = {
-  title: "GuardClaw - Open Source Tools for the OpenClaw Community",
+  title: "GuardClaw — Free Tools for the OpenClaw Community",
   description:
-    "GuardClaw finds real pain in the OpenClaw community and ships free, open source tools that fix it.",
-  authors: [{ name: "Rohit / GuardClaw" }],
+    "GuardClaw is a growing toolkit of free open source utilities built for the OpenClaw community. Created in public by indie developer Rohit Kumar Suman.",
+  authors: [{ name: "Rohit Kumar Suman / GuardClaw" }],
   metadataBase: new URL("https://guardclaw.dev"),
   alternates: {
     canonical: "/",
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    title: "GuardClaw - Open Source Tools for the OpenClaw Community",
+    title: "GuardClaw — Free Tools for the OpenClaw Community",
     description:
-      "GuardClaw finds real pain in the OpenClaw community and ships free, open source tools that fix it.",
+      "GuardClaw is a growing toolkit of free open source utilities built for the OpenClaw community. Created in public by indie developer Rohit Kumar Suman.",
     url: "https://guardclaw.dev",
   },
 };
