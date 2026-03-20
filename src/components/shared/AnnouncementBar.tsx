@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 interface AnnouncementBarProps {
@@ -21,12 +20,7 @@ export function AnnouncementBar({
     : {};
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: "-100%" }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-      className="flex min-h-10 w-full flex-wrap items-center justify-center gap-x-2.5 gap-y-1 border-b border-border bg-secondary px-4 py-2.5 text-center sm:px-6"
-    >
+    <div className="flex min-h-10 w-full flex-wrap items-center justify-center gap-x-2.5 gap-y-1 border-b border-border bg-secondary px-4 py-2.5 text-center sm:px-6">
       <span className="shrink-0 rounded bg-primary px-2 py-0.5 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-primary-foreground">
         {badge}
       </span>
@@ -46,6 +40,6 @@ export function AnnouncementBar({
       >
         {linkLabel}
       </Link>
-    </motion.div>
+    </div>
   );
 }
