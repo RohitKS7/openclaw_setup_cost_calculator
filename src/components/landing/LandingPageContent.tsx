@@ -123,10 +123,10 @@ export function LandingPageContent() {
     <div className="min-h-screen">
       <Header />
       <AnnouncementBar
-        badge="COMING SOON"
-        message="Field Note #002 - OpenClaw Model Picker is coming soon."
-        linkLabel="Follow along -&gt;"
-        linkHref={SOCIAL_LINKS.twitter}
+        badge="LIVE"
+        message="Field Note #002 - OpenClaw Model Picker is Live"
+        linkLabel="Try It &#x2192;"
+        linkHref="https://picker.guardclaw.dev/"
         external
       />
       <main className="pb-8">
@@ -138,7 +138,10 @@ export function LandingPageContent() {
           </div>
           <div className="grid w-full gap-12 md:gap-8 lg:grid-cols-[minmax(0,55%)_minmax(0,45%)] lg:items-center">
             <div className="mx-auto flex max-w-[40rem] flex-col justify-center text-center lg:mx-0 lg:text-left md:relative md:bottom-12">
-              <h1 className="mt-20 text-[2rem] font-bold leading-[1.03] text-foreground sm:mt-24 sm:text-[2.5rem] md:text-[3.25rem] lg:mt-28 lg:text-[3.5rem] reveal-up reveal-delay-1">
+              <p className="mt-16 text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:mt-20 lg:mt-24 reveal-up">
+                Field Note #001
+              </p>
+              <h1 className="mt-3 text-[2rem] font-bold leading-[1.03] text-foreground sm:text-[2.5rem] md:text-[3.25rem] lg:text-[3.5rem] reveal-up reveal-delay-1">
                 <span className="relative inline-block">
                   <span className="block">Running blind is</span>
                   <svg

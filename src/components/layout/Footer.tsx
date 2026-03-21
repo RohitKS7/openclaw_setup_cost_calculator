@@ -22,6 +22,8 @@ export function Footer() {
           <p className="mt-2 text-sm text-muted-foreground">
           GuardClaw is built in public by Rohit. Each tool starts from a real problem. More are coming.
           </p>
+          <p className="mt-3 text-sm text-muted-foreground">Built in public by Rohit Kumar Suman.</p>
+
         </div>
 
         <div>
@@ -38,16 +40,20 @@ export function Footer() {
         </div>
 
         <div className="space-y-2 text-sm text-muted-foreground">
-          <p>
+        <p>
             <Link href={SOCIAL_LINKS.github} target="_blank" className="hover:text-foreground">
               GitHub
             </Link>
           </p>
           <p>
-            <Link href={SOCIAL_LINKS.twitter} target="_blank" className="hover:text-foreground">Follow My Journey @SumanRohitK7</Link>
+            <Link href={SOCIAL_LINKS.twitter} target="_blank" className="hover:text-foreground">
+              Follow My Journey @SumanRohitK7
+            </Link>
           </p>
           <p>
-            Built by Rohit Kumar Suman
+            <Link href={SOCIAL_LINKS.linkedin} target="_blank" className="hover:text-foreground">
+              LinkedIn
+            </Link>
           </p>
         </div>
       </div>
