@@ -73,7 +73,50 @@ const previewCards = [
   },
 ];
 
-const heroCardRotations = ["-rotate-1", "rotate-1", "-rotate-1", "rotate-1"];
+const heroCardRotations = ["md:-rotate-1", "md:rotate-1", "md:-rotate-1", "md:rotate-1"];
+const heroBadges = [
+  "Free and open source",
+  "No paywalls",
+  "No hidden limits",
+  "No account",
+  "No data stored",
+  "Runs entirely in your browser",
+];
+
+function StarBadgeIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="h-8 w-8 text-primary"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 3.5l2.6 5.26 5.8.85-4.2 4.1.99 5.79L12 16.74 6.81 19.5l.99-5.79-4.2-4.1 5.8-.85L12 3.5z" />
+    </svg>
+  );
+}
+
+function SupportBadgeIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="h-8 w-8 text-accent"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 20s-6.5-3.94-8.5-8.17C2.07 8.92 3.72 6 6.93 6c2.02 0 3.18 1.05 4.02 2.3C11.89 7.05 13.05 6 15.07 6c3.21 0 4.86 2.92 3.43 5.83C18.5 16.06 12 20 12 20z" />
+      <path d="M8.5 12h2.1l1.02-2.07L13.4 14l.93-2H16" />
+    </svg>
+  );
+}
 
 export function LandingPageContent() {
   return (
@@ -87,12 +130,17 @@ export function LandingPageContent() {
         external
       />
       <main className="pb-8">
-        <section className="container-brand flex min-h-[calc(100vh-10rem)] items-center py-10 md:py-12">
-          <div className="grid w-full gap-12 md:grid-cols-[minmax(0,55%)_minmax(0,45%)] md:items-center">
-            <div className="flex max-w-[40rem] flex-col justify-center">
-              <h1 className="text-[2.25rem] font-bold leading-[1.15] text-foreground md:text-[3.5rem]">
+        <section className="container-brand relative flex items-center py-8 sm:py-10 lg:min-h-[calc(100vh-10rem)] lg:py-12">
+          <div className="absolute w-max left-1/2 top-8 z-10 -translate-x-1/2 sm:top-10 lg:top-12">
+            <div className="mx-auto inline-flex max-w-full items-center justify-center rounded-full bg-accent px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-primary-foreground shadow-sm">
+              Part of GuardClaw Ecosystem - Built by Rohit
+            </div>
+          </div>
+          <div className="grid w-full gap-12 md:gap-8 lg:grid-cols-[minmax(0,55%)_minmax(0,45%)] lg:items-center">
+            <div className="mx-auto flex max-w-[40rem] flex-col justify-center text-center lg:mx-0 lg:text-left md:relative md:bottom-12">
+              <h1 className="mt-20 text-[2rem] font-bold leading-[1.03] text-foreground sm:mt-24 sm:text-[2.5rem] md:text-[3.25rem] lg:mt-28 lg:text-[3.5rem]">
                 <span className="relative inline-block">
-                  <span>Running blind</span>
+                  <span className="block">Running blind is</span>
                   <svg
                     aria-hidden="true"
                     viewBox="0 0 260 22"
@@ -106,53 +154,51 @@ export function LandingPageContent() {
                       strokeLinecap="round"
                     />
                   </svg>
-                </span>{" "}
-                is the default state for OpenClaw users.
+                </span>
+                <span className="mt-3 block">the default state for</span>
+                <span className="block">OpenClaw users.</span>
               </h1>
 
-              <p className="mt-6 max-w-[30rem] text-[1.125rem] text-muted-foreground">
-                Paste your model config, heartbeat settings, and fallback behaviour to see your real daily and monthly
-                cost - <br />
-                before it drains. <br />
-                <span className="text-xs"> 
-                Free and open source. No paywalls. No hidden limits. No account. No data stored. Runs entirely in your browser.
-                  </span>
+              <p className="mx-auto mt-8 max-w-[21rem] text-[1.02rem] leading-[1.9] text-muted-foreground sm:max-w-[34rem] sm:text-[1.125rem] lg:mx-0 lg:mt-6 lg:max-w-[26rem] lg:text-left">
+                <span className="block">Paste your model config, heartbeat settings, and fallback behaviour to see your real daily and monthly cost - before it drains.</span>
               </p>
 
-              <div className="mt-8">
-                <div className="inline-flex">
+              <div className="mx-auto mt-8 flex max-w-[22rem] flex-wrap items-center justify-center gap-2.5 text-center lg:mx-0 lg:max-w-[30rem] lg:justify-start">
+                {heroBadges.map((badge) => (
+                  <span
+                    key={badge}
+                    className="inline-flex items-center rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[0.72rem] font-medium leading-5 text-muted-foreground"
+                  >
+                    {badge}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-8 flex justify-center lg:justify-start">
+                <div className="inline-flex w-full sm:w-auto">
                   <Link
                     href="/calculate"
-                    className="rounded-full bg-accent px-8 py-4 text-base font-semibold text-accent-foreground transition hover:brightness-105"
+                    className="inline-flex w-full items-center justify-center rounded-full bg-accent px-8 py-4 text-base font-semibold text-accent-foreground transition hover:brightness-105 sm:w-auto"
                   >
                     Calculate my setup cost -&gt;
                   </Link>
                 </div>
               </div>
-
-              <p className="mt-4 text-sm text-muted-foreground">
-                Built by{" "}
-                <Link href={SOCIAL_LINKS.github} target="_blank" className="transition hover:text-foreground">
-                  Rohit
-                </Link>{" "}
-                - Part of{" "}
-                <Link href={SOCIAL_LINKS.tools} target="_blank" className="transition hover:text-foreground">
-                  GuardClaw toolkit
-                </Link>
-              </p>
             </div>
 
-            <div className="relative">
-              <p className="mb-4 text-center text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+            <div className="relative mx-auto w-full max-w-xl max-md:border max-md:border-border/70 max-md:bg-primary max-md:p-4 rounded-lg lg:mx-0 lg:block">
+              <p className="mb-3 text-center text-xs font-semibold uppercase tracking-[0.15em] max-sm:text-primary-foreground sm:mb-4">
                 Seen across Discord, Reddit, and X
               </p>
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
                 {communityQuotes.map((item, index) => (
                   <article
                     key={item.quote}
-                    className={`rounded-[6px] bg-secondary px-6 py-5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] ${heroCardRotations[index]}`}
+                    className={`rounded-[10px] bg-secondary p-5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] ${heroCardRotations[index]}`}
                   >
-                    <p className="font-serif text-[1.35rem] italic leading-relaxed text-foreground">{item.quote}</p>
+                    <p className="font-serif text-[1.1rem] italic leading-relaxed text-foreground sm:text-[1.2rem] lg:text-[1.35rem]">
+                      {item.quote}
+                    </p>
                     <p className="mt-4 text-xs font-semibold tracking-[0.16em] text-muted-foreground [font-variant:small-caps]">
                       {item.source}
                     </p>
@@ -163,28 +209,33 @@ export function LandingPageContent() {
           </div>
         </section>
 
-        <div className="container-brand space-y-8 pb-12">
+        <div className="container-brand space-y-6 pb-12 sm:space-y-8 max-md:mt-6">
           <section className="space-y-5">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-              What the calculator covers
-            </p>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <p className="shrink-0 text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                What the calculator covers
+              </p>
+              <div className="h-px flex-1 bg-border/80" aria-hidden="true" />
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 max-md:text-center">
               {calculatorCoverage.map((item) => (
-                <article key={item.label} className="rounded-brand border bg-background/80 p-5">
-                  <div className="text-3xl">{item.icon}</div>
+                <article key={item.label} className="rounded-brand border bg-background/80 p-5 text-center md:text-left">
+                  <div className="flex justify-center text-3xl md:justify-start">{item.icon}</div>
                   <h2 className="mt-4 text-2xl font-bold">{item.label}</h2>
                   <p className="mt-2 text-sm text-muted-foreground">{item.description}</p>
                 </article>
               ))}
             </div>
-              <span className="text-sm text-muted-foreground">
-              No account. No data stored. Runs entirely in your browser.
-              </span>
           </section>
 
-          <section className="space-y-5">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">What you'll see</p>
-            <div className="grid gap-4 lg:grid-cols-3">
+          <section className="space-y-5 pt-6 pb-8">
+          <div className="flex items-center gap-3 sm:gap-4 ">
+            <p className=" shrink-0  text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">What you'll see</p>
+            <div className="h-px flex-1 bg-border/80" aria-hidden="true" />
+            </div>
+           
+            <div className="grid gap-4 lg:grid-cols-3 max-md:text-center">
               {previewCards.map((card) => (
                 <article
                   key={card.before}
@@ -228,7 +279,7 @@ This tool exists to make that visible - before it costs you.
           </section>
 
           <section>
-            <p className="mb-10 mt-3 text-center text-xl font-semibold italic leading-tight text-accent whitespace-pre-line">
+            <p className="mb-8 mt-3 whitespace-pre-line text-center text-lg font-semibold italic leading-tight text-accent sm:mb-10 sm:text-xl">
               {`"This is just one piece.
 
 More tools are coming to solve the rest." - Rohit`}
@@ -237,15 +288,15 @@ More tools are coming to solve the rest." - Rohit`}
 
           <div className="grid gap-6 lg:grid-cols-2">
             <section className="rounded-brand border bg-background/85 p-6">
-              <div className="flex justify-between">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm font-semibold uppercase tracking-[0.16em] text-muted-foreground">Field Note #002</p>
                 <div className="inline-flex overflow-hidden rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-accent">
                   <span className="coming-soon-shimmer">Coming soon</span>
                 </div>
               </div>
-              <div className="flex flex-wrap items-start justify-between gap-5">
+              <div className="mt-4 flex flex-col gap-5  lg:items-start lg:justify-between">
                 <div className="max-w-2xl">
-                  <h2 className="mt-4 text-2xl font-bold">OpenClaw Model Picker</h2>
+                  <h2 className="text-2xl font-bold">OpenClaw Model Picker</h2>
                   <p className="mt-3 text-base text-muted-foreground">
                     Every new OpenClaw user hits the same wall: which model should I use, and what will it cost? This
                     tool asks what you're trying to do and gives you a clear answer. No Discord thread required.
@@ -254,7 +305,7 @@ More tools are coming to solve the rest." - Rohit`}
                 <Link
                   href={SOCIAL_LINKS.twitter}
                   target="_blank"
-                  className="rounded-full border border-primary/30 px-5 py-2 text-sm font-semibold transition hover:bg-primary hover:text-primary-foreground"
+                  className="inline-flex w-full items-center justify-center rounded-full border border-primary/30 px-5 py-2 text-sm font-semibold transition hover:bg-primary hover:text-primary-foreground sm:w-auto"
                 >
                   Follow on Twitter -&gt;
                 </Link>
@@ -272,18 +323,18 @@ More tools are coming to solve the rest." - Rohit`}
                   <p className="mt-3 text-sm text-muted-foreground"># Built in public by Rohit Kumar Suman</p>
                 </div>
 
-                <div className="mt-4 flex flex-wrap gap-3">
+                <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                   <Link
                     href={SOCIAL_LINKS.website}
                     target="_blank"
-                    className="rounded-full border border-primary/30 px-5 py-2 text-sm font-semibold transition hover:bg-primary hover:text-primary-foreground"
+                    className="inline-flex items-center justify-center rounded-full border border-primary/30 px-5 py-2 text-sm font-semibold transition hover:bg-primary hover:text-primary-foreground"
                   >
                     Visit Ecosystem Hub
                   </Link>
                   <Link
                     href={SOCIAL_LINKS.tools}
                     target="_blank"
-                    className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground"
+                    className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground"
                   >
                     Explore GuardClaw Tools
                   </Link>
@@ -294,36 +345,36 @@ More tools are coming to solve the rest." - Rohit`}
 
           <section className="grid gap-6 md:grid-cols-2">
             <article className="rounded-brand border bg-secondary/45 p-6">
-              <p className="text-2xl leading-none">Star</p>
+              <StarBadgeIcon />
               <h2 className="mt-4 text-2xl font-bold">Star on GitHub</h2>
               <p className="mt-3 text-muted-foreground">If this tool saved you money, a star helps others find it.</p>
               <Link
                 href={SOCIAL_LINKS.tool_github}
                 target="_blank"
-                className="mt-4 inline-flex rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground"
+                className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground sm:w-auto"
               >
                 Star the repo -&gt;
               </Link>
             </article>
 
             <article className="rounded-brand border border-accent bg-background/80 p-6">
-              <p className="text-2xl leading-none">Support</p>
+              <SupportBadgeIcon />
               <h2 className="mt-4 text-2xl font-bold">Sponsor the build</h2>
               <p className="mt-3 text-muted-foreground">Support independent tools built for the OpenClaw community.</p>
               <Link
                 href="https://github.com/sponsors/RohitKS7"
                 target="_blank"
-                className="mt-4 inline-flex rounded-full bg-accent px-5 py-2 text-sm font-semibold text-accent-foreground"
+                className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-accent px-5 py-2 text-sm font-semibold text-accent-foreground sm:w-auto"
               >
                 Sponsor on GitHub -&gt;
               </Link>
             </article>
           </section>
 
-          <section className="rounded-brand border bg-background/85 p-6">
+          <section className="rounded-brand border bg-background/85 p-6 max-md:text-center">
             <h2 className="text-2xl font-bold">Builder Identity</h2>
             <div className="mt-4 grid gap-6 md:grid-cols-[220px_1fr] md:items-center">
-              <div className="overflow-hidden rounded-brand border border-primary/20">
+              <div className="mx-auto w-full max-w-xs overflow-hidden rounded-brand border border-primary/20 md:mx-0 md:max-w-none">
                 <Image
                   src="/headshot-bg.png"
                   alt="Rohit Kumar"
@@ -333,7 +384,7 @@ More tools are coming to solve the rest." - Rohit`}
                 />
               </div>
               <div>
-                <p className="text-lg font-semibold">Built by Rohit Kumar</p>
+                <p className="text-lg font-semibold">Built by Rohit Kumar Suman</p>
                 <p className="mt-2 text-muted-foreground">
                   I build tools based on repeated problems I see in OpenClaw communities. Then I ship them fast.
                   Feedback shapes what comes next.
@@ -344,17 +395,17 @@ More tools are coming to solve the rest." - Rohit`}
                     GitHub star genuinely helps. -&gt; github.com/RohitKS7
                   </Link>
                 </p>
-                <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold">
-                  <Link href={SOCIAL_LINKS.github} target="_blank" className="rounded-full border border-primary/30 px-4 py-2">
+                <div className="mt-4 grid gap-3 text-sm font-semibold sm:flex sm:flex-wrap">
+                  <Link href={SOCIAL_LINKS.github} target="_blank" className="inline-flex items-center justify-center rounded-full border border-primary/30 px-4 py-2">
                     GitHub
                   </Link>
-                  <Link href={SOCIAL_LINKS.twitter} target="_blank" className="rounded-full border border-primary/30 px-4 py-2">
+                  <Link href={SOCIAL_LINKS.twitter} target="_blank" className="inline-flex items-center justify-center rounded-full border border-primary/30 px-4 py-2">
                     Twitter/X
                   </Link>
-                  <Link href={SOCIAL_LINKS.linkedin} target="_blank" className="rounded-full border border-primary/30 px-4 py-2">
+                  <Link href={SOCIAL_LINKS.linkedin} target="_blank" className="inline-flex items-center justify-center rounded-full border border-primary/30 px-4 py-2">
                     LinkedIn
                   </Link>
-                  <Link href={SOCIAL_LINKS.website} target="_blank" className="rounded-full border border-primary/30 px-4 py-2">
+                  <Link href={SOCIAL_LINKS.website} target="_blank" className="inline-flex items-center justify-center rounded-full border border-primary/30 px-4 py-2">
                     Journey
                   </Link>
                 </div>

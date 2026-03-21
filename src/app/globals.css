@@ -83,7 +83,13 @@ a {
 .container-brand {
   width: min(100%, 1200px);
   margin-inline: auto;
-  padding-inline: 1.5rem;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-brand {
+    padding-inline: 1.5rem;
+  }
 }
 
 .coming-soon-shimmer {
