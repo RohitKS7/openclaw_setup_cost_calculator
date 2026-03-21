@@ -20,7 +20,7 @@ export function AnnouncementBar({
     : {};
 
   return (
-    <div className="flex w-full max-sm:flex-row flex-col items-center justify-center gap-2 border-b border-border bg-secondary px-4 py-3 text-center sm:min-h-10 sm:flex-row sm:flex-wrap sm:gap-x-2.5 sm:gap-y-1 sm:px-6 sm:py-2.5">
+    <div className="flex w-full items-center justify-center gap-2 border-b border-border bg-secondary px-4 py-3 text-center sm:min-h-10 sm:flex-row sm:flex-wrap sm:gap-x-2.5 sm:gap-y-1 sm:px-6 sm:py-2.5">
       <span className="shrink-0 rounded bg-primary px-2 py-0.5 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-primary-foreground max-sm:w-min">
         {badge}
       </span>
@@ -39,7 +39,7 @@ export function AnnouncementBar({
         className="inline-flex items-center justify-center font-sans text-sm font-medium text-accent no-underline transition-opacity duration-150 hover:opacity-80 hover:underline"
       >
         <span className="sm:hidden" aria-label={linkLabel}>
-        →
+        &#x2192;
         </span>
         <span className="hidden sm:inline">{linkLabel}</span>
       </Link>

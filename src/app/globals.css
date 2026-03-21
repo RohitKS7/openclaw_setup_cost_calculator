@@ -116,3 +116,73 @@ a {
   }
 }
 
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-cta {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+
+  50% {
+    transform: scale(1.03);
+    filter: brightness(1.05);
+  }
+}
+
+@keyframes draw-underline {
+  from {
+    stroke-dashoffset: 320;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.reveal-up {
+  animation: reveal-up 0.55s ease-out both;
+}
+
+.reveal-delay-1 {
+  animation-delay: 120ms;
+}
+
+.reveal-delay-2 {
+  animation-delay: 220ms;
+}
+
+.reveal-delay-3 {
+  animation-delay: 320ms;
+}
+
+.pulse-cta {
+  animation: pulse-cta 2.2s ease-in-out infinite;
+}
+
+.hover-lift {
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.13);
+}
+
+.underline-draw {
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+  animation: draw-underline 800ms ease-in-out 320ms both;
+}
+
