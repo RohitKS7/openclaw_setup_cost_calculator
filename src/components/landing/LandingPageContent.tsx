@@ -126,7 +126,7 @@ export function LandingPageContent() {
         badge="LIVE"
         message="Field Note #002 - OpenClaw Model Picker is Live"
         linkLabel="Try It &#x2192;"
-        linkHref="https://picker.guardclaw.dev/"
+        linkHref={SOCIAL_LINKS.tool_modelpicker}
         external
       />
       <main className="pb-8">

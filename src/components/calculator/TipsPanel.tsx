@@ -70,14 +70,14 @@ export function TipsPanel({ tips, savedMonthlyDiff, onApplyTip }: TipsPanelProps
         </p>
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <Link
-            href="/model-picker"
+            href="https://guardclaw.dev/picker"
             className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground"
           >
             Find my optimal setup -&gt;
           </Link>
-          <Link href={SOCIAL_LINKS.twitter} target="_blank" className="text-xs text-muted-foreground underline">
+          {/* <Link href={SOCIAL_LINKS.twitter} target="_blank" className="text-xs text-muted-foreground underline">
             Coming soon - get notified
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>
