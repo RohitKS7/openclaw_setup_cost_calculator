@@ -2,11 +2,11 @@
 
 **Stop running blind. See what your OpenClaw setup actually costs — before it drains.**
 
-A free, open-source calculator for OpenClaw developers to estimate daily and
+A free, open-source calculator for OpenClaw users to estimate daily and
 monthly token spend across models, heartbeats, fallback behaviour, and
 multi-agent setups. No account. No backend. Runs entirely in the browser.
 
-🔗 **[Try it live → calculator.guardclaw.dev](https://calculator.guardclaw.dev)**
+🔗 **[Try it live → calculator.guardclaw.dev](https://guardclaw.dev/calculator)**
 
 ---
 
@@ -55,8 +55,8 @@ Local models (Ollama, vLLM) default to $0 with an optional compute cost input.
 ## Running locally
 
 ```bash
-git clone https://github.com/RohitKS7/openclaw-token-calculator
-cd openclaw-token-calculator
+git clone https://github.com/RohitKS7/openclaw_setup_cost_calculator
+cd openclaw_setup_cost_calculator
 npm install
 npm run dev
 ```
@@ -106,12 +106,19 @@ is the most useful contribution you can make.
 
 ## Part of the GuardClaw ecosystem
 
-This tool is Field Note #001 in the GuardClaw toolkit —
-a collection of free, open-source tools for OpenClaw developers.
+This tool is **Field Note #001: Token Cost Calculator** in the GuardClaw toolkit —
+a collection of free, open-source tools for OpenClaw users.
 
-🌐 [guardclaw.dev](https://guardclaw.dev)
+**Next in the ecosystem:**
+- **Field Note #002:** [Model Picker](https://guardclaw.dev/picker) — Choose the right model for your use case, then verify the cost here
+- More tools coming soon
 
-More tools in the build queue. Follow along:
+After calculating your costs, use the Model Picker to ensure you're using the right model:
+🔗 [Open Model Picker](https://guardclaw.dev/picker)
+
+🌐 [View all GuardClaw tools](https://guardclaw.dev)
+
+Follow the journey:
 [@SumanRohitK7](https://twitter.com/SumanRohitK7)
 
 ---
@@ -127,7 +134,12 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for how to help.
 
 If this tool saved you money, a GitHub star helps others find it.
 
-⭐ [Star this repo](https://github.com/RohitKS7/openclaw-token-calculator)
+**Using a specific model?** Verify it with the Model Picker:
+🔗 [Model Picker → guardclaw.dev/picker](https://guardclaw.dev/picker)
+
+Show your support:
+
+⭐ [Star this repo](https://github.com/RohitKS7/openclaw_setup_cost_calculator)
 💜 [Sponsor on GitHub](https://github.com/sponsors/RohitKS7)
 
 ---
