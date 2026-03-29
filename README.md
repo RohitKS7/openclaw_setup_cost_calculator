@@ -6,11 +6,11 @@ A free, open-source calculator for OpenClaw users to estimate daily and
 monthly token spend across models, heartbeats, fallback behaviour, and
 multi-agent setups. No account. No backend. Runs entirely in the browser.
 
-🔗 **[Try it live → calculator.guardclaw.dev](https://guardclaw.dev/calculator)**
+🔗 **[Try it live → guardclaw.dev/calculator](https://guardclaw.dev/calculator)**
 
 ---
 
-<!-- Add screenshot here: results summary card showing cost breakdown -->
+![Calculator Output](./public/calculator.gif)
 
 ---
 
