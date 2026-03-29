@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
@@ -11,6 +12,7 @@ import { ShareButton } from "@/components/calculator/ShareButton";
 import { SummaryCard } from "@/components/calculator/SummaryCard";
 import { ShareResult } from "@/components/ShareResult";
 import { DEFAULT_CALCULATOR_STATE } from "@/data/defaults";
+import { SOCIAL_LINKS } from "@/data/ecosystem";
 import {
   DEFAULT_HEARTBEAT_MODEL,
   DEFAULT_PRIMARY_MODEL,
@@ -206,6 +208,33 @@ export function ToolPageContent() {
         savedMonthlyDiff={savedMonthlyDiff}
         onApplyTip={applyTip}
       />
+
+      <section className="rounded-brand border border-primary/20 bg-secondary/35 p-5">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          Next Step
+        </p>
+        <h3 className="mt-2 text-xl font-bold">Pick a model stack before finalizing costs</h3>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Use the Model Picker to choose a primary and fallback model, then return here to stress test
+          spend under your real usage settings.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <Link
+            href={SOCIAL_LINKS.tool_modelpicker}
+            target="_blank"
+            className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
+          >
+            Next step: pick a model
+          </Link>
+          <Link
+            href={SOCIAL_LINKS.tools}
+            target="_blank"
+            className="rounded-full border border-primary/30 px-5 py-2 text-sm font-semibold transition hover:bg-primary hover:text-primary-foreground"
+          >
+            Browse GuardClaw tools hub
+          </Link>
+        </div>
+      </section>
 
       <ShareResult
         primaryModel={state.primaryModel}

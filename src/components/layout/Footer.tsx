@@ -8,8 +8,8 @@ const TOOL_LINKS = [
     href: SOCIAL_LINKS.tool_modelpicker,
   },
   {
-    label: "More tools in progress",
-    href: SOCIAL_LINKS.website,
+    label: "GuardClaw Tools Hub",
+    href: SOCIAL_LINKS.tools,
   },
 ];
 
