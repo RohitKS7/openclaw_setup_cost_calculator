@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { Tooltip } from "@/components/shared/Tooltip";
 import { MODEL_GROUPS } from "@/data/pricing";
 import { type ExtendedCalculatorState, formatCurrency, getModelBehavior, type FallbackCostMetrics } from "@/utils/calculate";
 
@@ -18,6 +19,8 @@ const SUGGESTION_PAIRS = [
   { primary: "openai/gpt-5.2", fallback: "deepseek/deepseek-v3.2" },
   { primary: "zai/glm-4.7", fallback: "anthropic/claude-haiku-4-5" },
 ];
+const FALLBACK_MODEL_TOOLTIP =
+  "If the primary model fails, this model takes over. Choose based on your task criticality and budget.";
 
 export function FallbackSection({ state, metrics, onChange }: FallbackSectionProps) {
   const [isExpanded, setIsExpanded] = useState((state.fallbackTriggerRate ?? 0) > 0);
@@ -70,7 +73,12 @@ export function FallbackSection({ state, metrics, onChange }: FallbackSectionPro
         <div id="fallback-model-cost-content">
           <div className="mt-5 grid gap-5 md:grid-cols-2">
             <label className="text-sm">
-              <span className="mb-2 block font-semibold text-foreground">Fallback model selector</span>
+              <span className="mb-2 flex items-center gap-2 font-semibold text-foreground">
+                Fallback model selector
+                <Tooltip label="Fallback Model" description={FALLBACK_MODEL_TOOLTIP}>
+                  <span className="text-sm font-semibold text-muted-foreground">?</span>
+                </Tooltip>
+              </span>
               <select
                 value={state.fallbackModel}
                 onChange={(event) => onChange({ fallbackModel: event.target.value })}

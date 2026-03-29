@@ -1,5 +1,6 @@
 "use client";
 
+import { Tooltip } from "@/components/shared/Tooltip";
 import { MODEL_GROUPS } from "@/data/pricing";
 import {
   type ExtendedCalculatorState,
@@ -14,13 +15,21 @@ interface MultiAgentSectionProps {
   onChange: (next: Partial<ExtendedCalculatorState>) => void;
 }
 
+const MULTI_AGENT_MODE_TOOLTIP =
+  "Run multiple agents simultaneously. Cost multiplies per agent. Enable only if you need parallel execution.";
+
 export function MultiAgentSection({ state, metrics, onChange }: MultiAgentSectionProps) {
   const behavior = getModelBehavior(metrics.perAgentModel);
 
   return (
     <section className="rounded-brand border bg-secondary/55 p-6">
       <div className="flex items-center justify-between gap-4">
-        <h2 className="text-2xl font-bold">5. Multi-Agent Mode</h2>
+        <div className="flex items-center gap-2">
+          <h2 className="text-2xl font-bold">5. Multi-Agent Mode</h2>
+          <Tooltip label="Multi-Agent Mode" description={MULTI_AGENT_MODE_TOOLTIP}>
+            <span className="text-sm font-semibold text-muted-foreground">?</span>
+          </Tooltip>
+        </div>
         <button
           type="button"
           onClick={() => onChange({ multiAgentEnabled: !metrics.enabled })}

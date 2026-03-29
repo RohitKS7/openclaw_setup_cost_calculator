@@ -1,6 +1,7 @@
 "use client";
 
 import { DEFAULT_HEARTBEAT_MODEL, DEFAULT_PRIMARY_MODEL, MODEL_GROUPS } from "@/data/pricing";
+import { Tooltip } from "@/components/shared/Tooltip";
 import type { CalculatorState, ThinkingMode } from "@/types/calculator";
 import {
   clampNumber,
@@ -17,6 +18,12 @@ interface ModelSectionProps {
 }
 
 const THINKING_OPTIONS: ThinkingMode[] = ["off", "low", "high"];
+const BILLING_MODE_TOOLTIP =
+  "Choose between Subscription (Claude Max/Codex plans) or Pay-per-token (API billing). This determines your actual cost structure.";
+const USAGE_PHASE_TOOLTIP =
+  "Setup phase means 3x higher usage (testing, trial-and-error). Steady State is production use. Pick what matches your current stage.";
+const FALLBACK_MODEL_TOOLTIP =
+  "If the primary model fails, this model takes over. Choose based on your task criticality and budget.";
 
 export function ModelSection({ state, usagePercent, onChange }: ModelSectionProps) {
   const billingMode: BillingMode = state.billingMode ?? "payg";
@@ -30,7 +37,14 @@ export function ModelSection({ state, usagePercent, onChange }: ModelSectionProp
         Estimate message spend by model, usage volume, and thinking intensity.
       </p>
 
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-4 flex items-center gap-2">
+        <p className="text-sm font-semibold text-foreground">Billing Mode</p>
+        <Tooltip label="Billing Mode" description={BILLING_MODE_TOOLTIP}>
+          <span className="text-sm font-semibold text-muted-foreground">?</span>
+        </Tooltip>
+      </div>
+
+      <div className="mt-2 flex flex-wrap gap-2">
         <button
           type="button"
           onClick={() => onChange({ billingMode: "payg" })}
@@ -86,7 +100,14 @@ export function ModelSection({ state, usagePercent, onChange }: ModelSectionProp
         </div>
       ) : null}
 
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-4 flex items-center gap-2">
+        <p className="text-sm font-semibold text-foreground">Usage Phase</p>
+        <Tooltip label="Usage Phase" description={USAGE_PHASE_TOOLTIP}>
+          <span className="text-sm font-semibold text-muted-foreground">?</span>
+        </Tooltip>
+      </div>
+
+      <div className="mt-2 flex flex-wrap gap-2">
         <button
           type="button"
           onClick={() => onChange({ usagePhase: "steady" })}
@@ -138,7 +159,12 @@ export function ModelSection({ state, usagePercent, onChange }: ModelSectionProp
         </label>
 
         <label className="text-sm">
-          <span className="mb-2 block font-semibold text-foreground">Fallback model (optional)</span>
+          <span className="mb-2 flex items-center gap-2 font-semibold text-foreground">
+            Fallback model (optional)
+            <Tooltip label="Fallback Model" description={FALLBACK_MODEL_TOOLTIP}>
+              <span className="text-sm font-semibold text-muted-foreground">?</span>
+            </Tooltip>
+          </span>
           <select
             value={state.fallbackModel || DEFAULT_HEARTBEAT_MODEL}
             onChange={(event) => onChange({ fallbackModel: event.target.value })}

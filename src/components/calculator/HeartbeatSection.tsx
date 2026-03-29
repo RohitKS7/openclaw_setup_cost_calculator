@@ -2,6 +2,7 @@
 
 import { HEARTBEAT_INTERVAL_OPTIONS } from "@/data/defaults";
 import { MODEL_OPTIONS } from "@/data/pricing";
+import { Tooltip } from "@/components/shared/Tooltip";
 import type { CalculatorState } from "@/types/calculator";
 import { clampNumber, formatCurrency, formatNumber } from "@/utils/calculate";
 
@@ -15,6 +16,9 @@ interface HeartbeatSectionProps {
   warningPercent: number;
   onChange: (next: Partial<CalculatorState>) => void;
 }
+
+const HEARTBEAT_INTERVAL_TOOLTIP =
+  "How often the agent checks for work. Lower values = more cost. 30min = 48 calls/day. Adjust based on your task frequency.";
 
 export function HeartbeatSection({
   state,
@@ -35,7 +39,12 @@ export function HeartbeatSection({
 
       <div className="mt-6 grid gap-5 md:grid-cols-2">
         <label className="text-sm">
-          <span className="mb-2 block font-semibold text-foreground">Heartbeat interval (minutes)</span>
+          <span className="mb-2 flex items-center gap-2 font-semibold text-foreground">
+            Heartbeat interval (minutes)
+            <Tooltip label="Heartbeat Interval" description={HEARTBEAT_INTERVAL_TOOLTIP}>
+              <span className="text-sm font-semibold text-muted-foreground">?</span>
+            </Tooltip>
+          </span>
           <select
             value={state.heartbeatInterval}
             onChange={(event) => onChange({ heartbeatInterval: Number(event.target.value) })}
@@ -106,4 +115,3 @@ export function HeartbeatSection({
     </section>
   );
 }
-
